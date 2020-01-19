@@ -14,7 +14,7 @@ client.on("ready", () =>{
 //start of commands
 
 //test command
-btoa.on("message", msg=>{
+client.on("message", msg=>{
     if (msg.content === "First try"){
         msg.reply("IDIOT");
     }
