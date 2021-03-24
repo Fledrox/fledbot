@@ -1,6 +1,6 @@
 const command = {
     name: 'test',
-    aliases: ['test', 'poke'],
+    aliases: ['poke', 'ch'],
     description: "Tests whether command handling works",
     usage: "",
     execute: function (message) {
