@@ -30,7 +30,7 @@ client.on("ready", () =>{
     //Discord presence
     client.user.setPresence({
         activity: {
-            name: 'Playing e621.net'
+            name: 'Some cool status'
         }, status: 'idle'
     });
 });
