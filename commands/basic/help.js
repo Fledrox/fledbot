@@ -24,12 +24,11 @@ module.exports = {
 			return message.channel.send(`<:fledpokerface:821087177525166151> I don't know about that command.`);
 		}
 
-		data.push(`Command: **${command.name}**\`\`\``);
+		data.push(`Command: **${command.name}**`);
 
-		if (command.description) data.push(`DESCRIPTION: ${command.description}`);
+		if (command.description) data.push(`DESCRIPTION: \`${command.description}\``);
 		if (command.aliases) data.push(`ALIASES: \`${command.aliases.join(', ')}\``);
 		if (command.usage) data.push(`USAGE: \`${config.prefix}${command.name} ${command.usage}\``);
-		data.push("\`\`\`")
 		message.channel.send(data, { split: true });
     },
 
