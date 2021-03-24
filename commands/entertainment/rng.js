@@ -1,12 +1,14 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
 const command = {
     name: 'rng',
     aliases: ['roll', 'dice'],
-    execute: function (arguments, message) {
-
-        message.channel.send("bigsex")
-
+	description: "Returns a random integer from 0 to X",
+    usage: "[X]",
+    args: true,
+    execute: function (message, client, args) {
+        var X = parseInt(args[0])
+        X = (X + 1)
+        X = Math.round(Math.random() * X)
+        message.channel.send(X);
     },
 };
 
