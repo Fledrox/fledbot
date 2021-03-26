@@ -11,6 +11,6 @@ module.exports = {
 	 * @param {string[]} args
 	 */
     execute: function (message, _client, args) {
-        message.channel.send(Math.round(Math.random() * (parseInt(args[0]) + 1)));
+        message.channel.send(Math.round(Math.random() * (parseInt(args[0]))));
     },
 };
