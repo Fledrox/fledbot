@@ -3,7 +3,6 @@ module.exports = {
     aliases: ['poke', 'ch'],
     description: "Tests whether command handling works",
     usage: "",
-    permissions: ['KICK_MEMBERS', 'BAN_MEMBERS', 'SEND_MESSAGES'],
     /**
 	 *
 	 * @param {import('discord.js').Message} message
