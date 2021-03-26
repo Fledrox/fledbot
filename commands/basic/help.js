@@ -62,7 +62,7 @@ const getCommand = (message, client, input) => {
 	if (cmd.name) info = `**Command name**: \`${cmd.name}\``;
 	if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map((a) => `\`${a}\``).join(', ')}`;
 	if (cmd.description) info += `\n**Description**: \`${cmd.description}\``;
-	if (cmd.usage) info += `\n**Usage**: \`${client.config.prefix}${cmd.name}${cmd.usage}\``;
+	if (cmd.usage) info += `\n**Usage**: \`${client.config.prefix}${cmd.name} ${cmd.usage}\``;
 	if (cmd.permissions) info += `\n**Permissions**: ${normalizePermissions(cmd.permissions)}`;
 
 	message.channel.send(embed.setColor(client.config.colour).setDescription(info));
