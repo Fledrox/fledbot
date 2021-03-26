@@ -1,18 +1,10 @@
-const Discord = require('discord.js');
-//const client = new Discord.Client();
-const command = {
-      name: 'mute',
-      execute: function (arguments, message) {
+// const command = {
+// 	name: 'mute',
+// 	execute: function (message, client, args) {
+// 		if (message.mentions.users.size) {
+// 			const mutedUser = message.mentions.users;
+// 		}
+// 	},
+// };
 
-        if (message.mentions.users.size){
-            const mutedUser = message.mentions.users
-
-
-            
-        }
-
-
-    },
-};
-
-module.exports = command;
+// module.exports = command;

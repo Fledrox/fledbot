@@ -1,35 +1,69 @@
-const config = require("../../config.json");
+const { MessageEmbed } = require('discord.js');
+const { normalizePermissions } = require('../../util/functions');
 
 module.exports = {
-    name: 'help',
+	name: 'help',
 	aliases: ['command'],
-	description: "Shows commands and their aliases, description and usage",
-	usage: "<command name>",
-    execute: function (message, client, args) {
-		const data = [];
-		const { commands } = message.client;
-		console.log(args);
+	description: 'Shows commands and their aliases, description and usage',
+	usage: '<command name>',
+	/**
+	 *
+	 * @param {import('discord.js').Message} message
+	 * @param {import('discord.js').Client} client
+	 * @param {string[]} args
+	 */
+	execute: function (message, client, args) {
+		if (!args[0]) return getAll(message, client);
+		return getCommand(message, client, args[0]);
+	},
+};
 
-		if (!args.length) {
-			data.push('Here\'s a list of spaghetti:');
-			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\nTry \`${config.prefix}help [command name]\` to get info on a specific command.`);
+/**
+ *
+ * @param {import('discord.js').Message} message
+ * @param {import('discord.js').Client} client
+ */
+const getAll = (message, client) => {
+	const embed = new MessageEmbed()
+		.setColor(client.config.colour)
+		.setTitle("Here's some spaghetti")
+		.setThumbnail(client.user.displayAvatarURL())
+		.setFooter(`To see a command descriptions, usage etc. use ${client.config.prefix}help <command>`);
 
-			return message.channel.send(data, { split: true })
-		}
-		const name = args[0].toLowerCase();
-		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+	const commands = (category) => {
+		return client.commands
+			.filter((cmd) => cmd.category === category)
+			.map((cmd) => `\`${cmd.name}\``)
+			.join(', ');
+	};
 
-		if (!command) {
-			return message.channel.send(`<:fledpokerface:821087177525166151> I don't know about that command.`);
-		}
+	message.channel.send(embed.setDescription([...new Set(client.commands.map(cmd => cmd.category))].map((category) => `**${category}** \n${commands(category)}`).reduce((string, category) => string + '\n' + category)));
+};
+/**
+ *
+ * @param {import('discord.js').Message} message
+ * @param {import('discord.js').Client} client
+ * @param {string} input
+ */
+const getCommand = (message, client, input) => {
+	const embed = new MessageEmbed();
 
-		data.push(`Command: **${command.name}**`);
+	// Get the cmd by the name or alias
+	const cmd = client.commands.get(input.toLowerCase()) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(input));
 
-		if (command.description) data.push(`DESCRIPTION: \`${command.description}\``);
-		if (command.aliases) data.push(`ALIASES: \`${command.aliases.join(', ')}\``);
-		if (command.usage) data.push(`USAGE: \`${config.prefix}${command.name} ${command.usage}\``);
-		message.channel.send(data, { split: true });
-    },
+	let info = `No information found for command **${input.toLowerCase()}**`;
 
+	// If no cmd is found, send not found embed
+	if (!cmd) {
+		return message.channel.send(embed.setColor(client.config.colour).setDescription(info));
+	}
+
+	// Add all cmd info to the embed
+	if (cmd.name) info = `**Command name**: \`${cmd.name}\``;
+	if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map((a) => `\`${a}\``).join(', ')}`;
+	if (cmd.description) info += `\n**Description**: \`${cmd.description}\``;
+	if (cmd.usage) info += `\n**Usage**: \`${client.config.prefix}${cmd.name} ${cmd.usage}\``;
+	if (cmd.permissions) info += `\n**Permissions**: ${normalizePermissions(cmd.permissions)}`;
+
+	message.channel.send(embed.setColor(client.config.colour).setDescription(info));
 };

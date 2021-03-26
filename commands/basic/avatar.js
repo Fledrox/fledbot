@@ -1,17 +1,15 @@
-const Discord = require('discord.js');
-module.exports = {
-      name: 'avatar',
-      aliases: ['icon', 'pfp', 'av'],
-      description: "Shows your or a mentionned user's avatar.",
-      usage: "<@user>",
-      execute: function (message) {
-           
-            var user = message.mentions.users.first() || message.author;
+const { MessageEmbed } = require('discord.js');
 
-            let embed = new Discord.MessageEmbed()
-                  .setImage(user.avatarURL())
-                  .setColor('#e1730c')
-            message.channel.send(embed)
-            
-      },
+module.exports = {
+	name: 'avatar',
+	aliases: ['icon', 'pfp', 'av'],
+	description: "Shows your or a mentioned user's avatar.",
+	usage: '<@user>',
+	/**
+	 * @param {import('discord.js').Message} message
+	 * @param {import('discord.js').Client} client
+	 */
+	execute: function (message, client) {
+		message.channel.send(new MessageEmbed().setImage((message.mentions.users.first() || message.author).displayAvatarURL({ dynamic: true })).setColor(client.config.colour));
+	},
 };
