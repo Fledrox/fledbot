@@ -1,5 +1,8 @@
 module.exports = {
 	name: 'ping',
+	aliases: ['latency'],
+    	description: "Computes API and RTT latency.",
+   	usage: "",
 	/**
 	 *
 	 * @param {import('discord.js').Message} message
