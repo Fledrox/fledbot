@@ -38,7 +38,7 @@ module.exports = (client, message) => {
 	//EXECUTE COMMAND
 	try {
 		command.execute(message, client, args.map((e) => e.toLowerCase()));
-		console.log(message.author.tag, ' executed command ', command.name);
+		console.log(message.author.tag, 'executed command', command.name);
 	} catch (error) {
 		console.log('SHOWING ERROR LOGS FOR COMMAND: ', commandName);
 		console.error(error);
