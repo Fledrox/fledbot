@@ -1,8 +1,7 @@
 {
 	"prefix": ",",
-	"token": "token",
-    	"version": "0.6.0",
-    	"creator": "Fledrox#5236",
-    	"credits": "```Bot by Fledrox.\nContributors: Sach1, Antaraki2004, dapper, Google search.```",
-    	"colour": "#e1730c"
+    "version": "0.6.0",
+    "creator": "Fledrox#5236",
+    "colour": "#e1730c",
+    "credits": "```Bot by Fledrox.\nContributors: Sach1, Antaraki2004, dapper, Google search.```"
 }
