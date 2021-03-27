@@ -3,10 +3,9 @@ module.exports = {
     
     //Command Info
     name: 'reload',
-    description: "Reloads a command",
-    usage: "<args>",
+    description: "Reloads a command. Reloads command. Limited to bot developer.",
+    usage: "<command>",
     guildOnly: false,
-    permissions: ['SOME_PERMISSION','OTHER_PERMISSION'],
     args: true,
 
     //JSDocs
@@ -20,6 +19,10 @@ module.exports = {
     execute: function (message, client, args) {
 
         try {
+            //Ignores if not bot dev
+            if (message.author.id != 343354536615739402) {
+                return message.channel.send("You are not Fledrox");
+            }
             //commandName is the argument
             const commandName = args[0].toLowerCase();
             //Gets bot's commands and aliases
