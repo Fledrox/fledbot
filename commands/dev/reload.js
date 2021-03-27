@@ -3,7 +3,7 @@ module.exports = {
     
     //Command Info
     name: 'reload',
-    description: "Reloads a command. Reloads command. Limited to bot developer.",
+    description: "Reloads a command. Limited to the bot developer.",
     usage: "<command>",
     guildOnly: false,
     args: true,
