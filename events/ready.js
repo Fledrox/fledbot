@@ -2,11 +2,13 @@
  *
  * @param {import('discord.js').Client} client
  */
+
+// Sets Discord presence
 module.exports = (client) => {
-	console.log('Bot is up and ready.');
+	console.log('Client has started. Hello World!');
 	client.user.setPresence({
 		activity: {
-			name: 'shoutouts to simpleflips',
+			name: 'Hacking NASA',
 		},
 		status: 'online',
 	});
