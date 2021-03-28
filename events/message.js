@@ -5,9 +5,9 @@ const { normalizePermissions } = require('../util/functions');
  * @param {import('discord.js').Message} message - The event message
  */
 module.exports = (client, message) => {
-	if (!message.content.toLowerCase().startsWith(client.config.prefix) || message.author.bot || !message.guild.me.permissions.has('SEND_MESSAGES')) return;
+	if (!message.content.toLowerCase().startsWith(client.config.prefix) || message.author.bot || (!message.guild?.me.permissions.has('SEND_MESSAGES') && message.channel.type !== 'dm') ) return;
 
-	if (!['699639314501337088', '647788572627435520', '752613055158026352'].includes(message.channel.id)) {
+	if (!['699639314501337088', '647788572627435520', '752613055158026352'].includes(message.channel.id) && message.channel.type !== 'dm') {
 		//If it's not in #bot-testing or #bots
 		message.channel.send('Wrong channel');
 		return console.log(message.channel.id);
